@@ -45,6 +45,15 @@ function onMapLoad() {
 			}
 			
 
+			for (var i=0; i<data_markers.length; i++){
+			markers.addLayer(L.marker([data_markers[i].lat,data_markers[i].lng]).bindPopup(data_markers[i].name + "<br>" + data_markers[i].address).openPopup());
+			map.addLayer(markers);
+			
+
+			}
+			
+			
+
 		}
 	});
 
@@ -80,7 +89,7 @@ function render_to_map(data_markers,filter){
 
 	for (var i=0; i<data_markers.length; i++){
 		if(data_markers[i].kind_food.includes(filter)){
-		markers.addLayer(L.marker([data_markers[i].lat,data_markers[i].lng]));
+		markers.addLayer(L.marker([data_markers[i].lat,data_markers[i].lng]).bindPopup(data_markers[i].name + "<br>" + data_markers[i].address).openPopup());
 		map.addLayer(markers);
 		}
 		
