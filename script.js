@@ -43,16 +43,8 @@ function onMapLoad() {
 			for (k=0; k<uniqueTypes.length; k++){
 				$('#kind_food_selector').append('<option>' + uniqueTypes[k]  + '</option>');
 			}
-			
 
-			for (var i=0; i<data_markers.length; i++){
-			markers.addLayer(L.marker([data_markers[i].lat,data_markers[i].lng]).bindPopup(data_markers[i].name + "<br>" + data_markers[i].address).openPopup());
-			map.addLayer(markers);
-			
-
-			}
-			
-			
+			render_to_map(data_markers, $('#kind_food_selector').val());
 
 		}
 	});
@@ -82,17 +74,15 @@ function render_to_map(data_markers,filter){
 	
 	markers.clearLayers();
 	//map.removeLayer(markers);
-    
-
-
-
-
+	
+	
 	for (var i=0; i<data_markers.length; i++){
-		if(data_markers[i].kind_food.includes(filter)){
-		markers.addLayer(L.marker([data_markers[i].lat,data_markers[i].lng]).bindPopup(data_markers[i].name + "<br>" + data_markers[i].address).openPopup());
+		if(data_markers[i].kind_food.includes(filter)||(filter === "todos" )){
+		markers.addLayer(L.marker([data_markers[i].lat,data_markers[i].lng]).bindPopup("<strong>" + data_markers[i].name + "</strong><br>" + data_markers[i].address).openPopup());
 		map.addLayer(markers);
-		}
 		
 	}
    		
+}
+
 }
